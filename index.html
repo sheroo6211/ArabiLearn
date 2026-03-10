@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArabiLearn — Learn Arabic the Natural Way</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0a06;
+  --bg2: #141009;
+  --bg3: #1c160e;
+  --surface: #221c11;
+  --surface2: #2a2215;
+  --border: #3a2e1a;
+  --gold: #d4952a;
+  --gold2: #f0b84a;
+  --gold3: #ffd980;
+  --teal: #2ab5a0;
+  --teal2: #3dd6be;
+  --red: #c0392b;
+  --green: #27ae60;
+  --text: #f5ead8;
+  --text2: #c4a876;
+  --text3: #7a6040;
+  --glow: 0 0 30px rgba(212,149,42,0.25);
+  --glow-teal: 0 0 30px rgba(42,181,160,0.25);
+  --radius: 14px;
+  --radius-lg: 22px;
+  --font: 'Outfit', sans-serif;
+  --font-arabic: 'Amiri', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Geometric background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212,149,42,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(42,181,160,0.05) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(212,149,42,0.02) 40px, rgba(212,149,42,0.02) 41px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(212,149,42,0.02) 40px, rgba(212,149,42,0.02) 41px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 16px 80px; }
+
+/* ============ HEADER ============ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-arabic);
+  font-size: 1.4rem;
+  color: #000;
+  box-shadow: var(--glow);
+}
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.logo-text span { color: var(--gold); }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text2);
+  font-family: var(--font);
+  letter-spacing: 0.5px;
+}
+
+.stat-chip.gold { border-color: var(--gold); color: var(--gold); }
+.stat-chip.teal { border-color: var(--teal); color: var(--teal); }
+
+.pro-tag {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  display: none;
+}
+.pro-tag.visible { display: inline-block; }
+
+.btn-icon {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: var(--text2);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-icon:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ============ NAV ============ */
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 0;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text2); background: var(--surface); }
+.nav-tab.active { background: var(--surface2); color: var(--gold); border: 1px solid var(--border); }
+
+/* ============ SECTIONS ============ */
+.section { display: none; padding: 32px 0; }
+.section.active { display: block; }
+
+.section-header {
+  margin-bottom: 28px;
+}
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.section-title span { color: var(--gold); }
+.section-subtitle { color: var(--text3); font-size: 0.9rem; line-height: 1.6; }
+
+/* ============ HERO ============ */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+}
+
+.hero-arabic {
+  font-family: var(--font-arabic);
+  font-size: 4rem;
+  color: var(--gold);
+  text-shadow: var(--glow);
+  margin-bottom: 8px;
+  line-height: 1.2;
+  animation: floatText 3s ease-in-out infinite;
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-tagline {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.hero-tagline span { color: var(--gold); }
+
+.hero-sub {
+  color: var(--text2);
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label { font-size: 0.75rem; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--glow);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,149,42,0.4); }
+
+.btn-secondary {
+  padding: 14px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text2);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Phrase showcase */
+.phrase-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.showcase-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.showcase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.showcase-card:hover { transform: translateY(-4px); box-shadow: var(--glow); border-color: var(--gold); }
+.showcase-card:hover::before { opacity: 1; }
+.showcase-arabic { font-family: var(--font-arabic); font-size: 1.8rem; color: var(--gold); margin-bottom: 8px; direction: rtl; }
+.showcase-transliteration { font-size: 0.78rem; color: var(--teal2); font-style: italic; margin-bottom: 4px; }
+.showcase-english { font-size: 0.85rem; color: var(--text2); }
+.showcase-play { font-size: 0.7rem; color: var(--text3); margin-top: 8px; }
+
+/* ============ LESSONS ============ */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.category-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212,149,42,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.category-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--glow); }
+.category-card:hover::after { opacity: 1; }
+.category-card.locked { opacity: 0.5; cursor: not-allowed; }
+.category-card.locked:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.category-card.premium-locked { opacity: 0.7; }
+
+.category-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.category-name { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.category-desc { font-size: 0.82rem; color: var(--text3); line-height: 1.5; margin-bottom: 12px; }
+.category-count { font-size: 0.75rem; color: var(--text3); }
+.category-progress {
+  height: 3px;
+  background: var(--bg3);
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.category-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+.premium-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #000;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* Lesson view */
+.lesson-view { display: none; }
+.lesson-view.active { display: block; }
+.lesson-list { display: none; }
+.lesson-list.active { display: block; }
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--gold); }
+
+.phrase-list { display: flex; flex-direction: column; gap: 12px; }
+
+.phrase-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-wrap: wrap;
+}
+.phrase-card:hover { border-color: var(--gold); box-shadow: var(--glow); }
+.phrase-card.mastered { border-color: var(--green); }
+.phrase-card.mastered::after { content: '✓'; color: var(--green); font-weight: 700; }
+
+.phrase-left { flex: 1; }
+.phrase-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.6rem;
+  color: var(--gold);
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 4px;
+}
+.phrase-transliteration { font-size: 0.8rem; color: var(--teal2); font-style: italic; margin-bottom: 4px; }
+.phrase-english { font-size: 0.9rem; color: var(--text2); }
+.phrase-context { font-size: 0.75rem; color: var(--text3); margin-top: 4px; font-style: italic; }
+
+.phrase-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.play-btn {
+  width: 40px; height: 40px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--gold);
+}
+.play-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+
+/* ============ PRACTICE ============ */
+.practice-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.mode-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.mode-card:hover { border-color: var(--gold); box-shadow: var(--glow); transform: translateY(-3px); }
+.mode-card.active { border-color: var(--gold); background: var(--surface2); }
+.mode-card.locked-mode { opacity: 0.5; cursor: not-allowed; }
+.mode-card.locked-mode:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.mode-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.mode-name { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.mode-desc { font-size: 0.8rem; color: var(--text3); line-height: 1.5; }
+
+/* Practice arena */
+.practice-arena {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.practice-score {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.score-chip {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.score-chip.correct { color: var(--green); border-color: var(--green); }
+.score-chip.wrong { color: var(--red); border-color: var(--red); }
+.score-chip.streak { color: var(--gold); border-color: var(--gold); }
+
+.question-label { font-size: 0.8rem; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.question-arabic {
+  font-family: var(--font-arabic);
+  font-size: 3.5rem;
+  color: var(--gold);
+  direction: rtl;
+  margin-bottom: 8px;
+  text-shadow: var(--glow);
+}
+.question-transliteration { font-size: 0.9rem; color: var(--teal2); font-style: italic; margin-bottom: 8px; }
+.question-english { font-size: 1rem; color: var(--text2); margin-bottom: 32px; }
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.choice-btn {
+  padding: 16px;
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  line-height: 1.4;
+}
+.choice-btn:hover { border-color: var(--gold); color: var(--gold); }
+.choice-btn.correct { border-color: var(--green); background: rgba(39,174,96,0.15); color: var(--green); }
+.choice-btn.wrong { border-color: var(--red); background: rgba(192,57,43,0.15); color: var(--red); }
+.choice-btn.arabic-choice { font-family: var(--font-arabic); font-size: 1.4rem; direction: rtl; }
+
+.type-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 16px 20px;
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.type-input:focus { border-color: var(--gold); }
+
+.next-btn {
+  margin-top: 20px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.next-btn:hover { transform: translateY(-2px); box-shadow: var(--glow); }
+
+.feedback-correct { color: var(--green); font-size: 1rem; font-weight: 700; margin-top: 16px; }
+.feedback-wrong { color: var(--red); font-size: 0.9rem; margin-top: 16px; }
+
+/* ============ PHRASEBOOK ============ */
+.search-bar-wrap { position: relative; margin-bottom: 24px; }
+.search-bar {
+  width: 100%;
+  padding: 14px 20px 14px 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-bar:focus { border-color: var(--gold); }
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  font-size: 1.1rem;
+}
+
+.filter-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.filter-tag {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text3);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-tag:hover { border-color: var(--gold); color: var(--gold); }
+.filter-tag.active { border-color: var(--gold); color: var(--gold); background: var(--surface2); }
+
+/* ============ PROGRESS ============ */
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.progress-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  text-align: center;
+}
+.progress-stat-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.progress-stat-label { font-size: 0.8rem; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
+
+.level-bar-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.level-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.level-name { font-weight: 700; font-size: 1rem; }
+.level-xp { font-size: 0.82rem; color: var(--text3); }
+.level-bar {
+  height: 8px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.level-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.achievement {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.achievement.unlocked { border-color: var(--gold); }
+.achievement.unlocked:hover { box-shadow: var(--glow); }
+.achievement-icon { font-size: 2rem; margin-bottom: 8px; filter: grayscale(1); }
+.achievement.unlocked .achievement-icon { filter: none; }
+.achievement-name { font-size: 0.78rem; font-weight: 600; color: var(--text3); }
+.achievement.unlocked .achievement-name { color: var(--gold); }
+
+/* ============ MODALS ============ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+.modal-overlay.hidden { display: none; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.modal-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--teal), var(--gold));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.modal-arabic {
+  font-family: var(--font-arabic);
+  font-size: 3rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.modal-title { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+.modal-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+.modal-price { font-size: 2.5rem; font-weight: 800; color: var(--gold); text-shadow: var(--glow); margin-bottom: 4px; }
+.modal-price-sub { font-size: 0.8rem; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+
+.modal-features {
+  text-align: left;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.modal-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 0.87rem;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+}
+.modal-feature:last-child { border-bottom: none; }
+.modal-feature .chk { color: var(--gold); }
+
+.btn-unlock {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+  box-shadow: var(--glow);
+}
+.btn-unlock:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,149,42,0.5); }
+
+.unlock-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.unlock-input {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.unlock-input:focus { border-color: var(--gold); }
+.btn-redeem {
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text2);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-redeem:hover { border-color: var(--gold); color: var(--gold); }
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text2); }
+
+/* Share modal */
+.share-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.share-btn {
+  padding: 14px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+.share-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.share-btn .share-icon { font-size: 1.4rem; }
+
+/* ============ TOAST ============ */
+#toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+.toast {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 0.85rem;
+  color: var(--text);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  animation: toastIn 0.3s ease;
+  white-space: nowrap;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============ SETTINGS ============ */
+.settings-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+.settings-item:last-child { border-bottom: none; }
+.settings-label { font-size: 0.9rem; font-weight: 600; }
+.settings-desc { font-size: 0.78rem; color: var(--text3); margin-top: 2px; }
+
+.toggle {
+  width: 44px; height: 24px;
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.toggle.on { background: var(--gold); border-color: var(--gold); }
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 2px; left: 2px;
+  transition: left 0.2s;
+}
+.toggle.on::after { left: 22px; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero-arabic { font-size: 2.5rem; }
+  .hero-tagline { font-size: 1.4rem; }
+  .practice-arena { padding: 24px 16px; }
+  .question-arabic { font-size: 2.5rem; }
+  .choices { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<!-- ========== PREMIUM MODAL ========== -->
+<div class="modal-overlay hidden" id="premium-modal">
+  <div class="modal-box">
+    <div class="modal-arabic">مرحباً</div>
+    <div class="modal-title">Unlock Premium Arabic</div>
+    <div class="modal-desc">You've mastered the basics! Upgrade to unlock advanced conversations, role-play scenarios, and full phrasebook access.</div>
+    <div class="modal-price">$4.99</div>
+    <div class="modal-price-sub">ONE-TIME — YOURS FOREVER</div>
+    <div class="modal-features">
+      <div class="modal-feature"><span class="chk">⭐</span> Advanced conversations</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Business & work phrases</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Shopping & bargaining</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Medical & emergency phrases</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Full 500+ phrase library</div>
+    </div>
+    <div class="unlock-row">
+      <input class="unlock-input" type="text" id="unlock-code-input" placeholder="HAVE A CODE?" maxlength="20">
+      <button class="btn-redeem" onclick="redeemCode()">Redeem</button>
+    </div>
+    <button class="btn-unlock" onclick="handleUpgrade()">⚡ Unlock Premium — $4.99</button>
+    <br>
+    <button class="modal-close" onclick="closeModal('premium-modal')">Maybe later</button>
+  </div>
+</div>
+
+<!-- ========== SHARE MODAL ========== -->
+<div class="modal-overlay hidden" id="share-modal">
+  <div class="modal-box">
+    <div class="modal-arabic">شارك</div>
+    <div class="modal-title">Share ArabiLearn</div>
+    <div class="modal-desc">Know someone who wants to learn Arabic? Share this app!</div>
+    <div class="share-grid">
+      <a class="share-btn" id="share-whatsapp" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">💬</span>WhatsApp
+      </a>
+      <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">🐦</span>Twitter / X
+      </a>
+      <a class="share-btn" id="share-reddit" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">🤖</span>Reddit
+      </a>
+      <button class="share-btn" onclick="copyShareLink()">
+        <span class="share-icon">🔗</span>Copy Link
+      </button>
+    </div>
+    <button class="modal-close" onclick="closeModal('share-modal')">Close</button>
+  </div>
+</div>
+
+<div class="app-wrapper">
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">ع</div>
+      <span class="logo-text">Arabi<span>Learn</span></span>
+    </div>
+    <div class="header-right">
+      <div class="stat-chip gold">⚡ XP: <span id="xp-display">0</span></div>
+      <div class="stat-chip teal">🔥 <span id="streak-display">0</span>d</div>
+      <span class="pro-tag" id="pro-tag">PRO ✓</span>
+      <button class="btn-icon" onclick="openShareModal()">📡 Share</button>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('home')">🏠 Home</button>
+    <button class="nav-tab" onclick="showSection('lessons')">📚 Lessons</button>
+    <button class="nav-tab" onclick="showSection('practice')">🎮 Practice</button>
+    <button class="nav-tab" onclick="showSection('phrasebook')">📖 Phrasebook</button>
+    <button class="nav-tab" onclick="showSection('progress')">🏆 Progress</button>
+    <button class="nav-tab" onclick="showSection('settings')">⚙️ Settings</button>
+  </nav>
+
+  <!-- ========== HOME ========== -->
+  <div class="section active" id="section-home">
+    <div class="hero">
+      <div class="hero-arabic">أهلاً وسهلاً</div>
+      <div class="hero-tagline">Learn Arabic <span>the Natural Way</span></div>
+      <div class="hero-sub">Real phrases. Real conversations. The Arabic that people actually use every day — not textbook Arabic.</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">200+</div>
+          <div class="hero-stat-label">Phrases</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">8</div>
+          <div class="hero-stat-label">Categories</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">4</div>
+          <div class="hero-stat-label">Practice Modes</div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="showSection('lessons')">Start Learning →</button>
+        <button class="btn-secondary" onclick="showSection('practice')">Quick Practice</button>
+      </div>
+    </div>
+
+    <div class="phrase-showcase" id="phrase-showcase"></div>
+  </div>
+
+  <!-- ========== LESSONS ========== -->
+  <div class="section" id="section-lessons">
+    <div class="lesson-list active" id="lesson-list">
+      <div class="section-header">
+        <div class="section-title">Choose a <span>Category</span></div>
+        <div class="section-subtitle">Start with greetings and work your way up to full conversations</div>
+      </div>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+
+    <div class="lesson-view" id="lesson-view">
+      <button class="back-btn" onclick="backToCategories()">← Back to Categories</button>
+      <div class="section-header" id="lesson-view-header"></div>
+      <div class="phrase-list" id="lesson-phrase-list"></div>
+    </div>
+  </div>
+
+  <!-- ========== PRACTICE ========== -->
+  <div class="section" id="section-practice">
+    <div class="section-header">
+      <div class="section-title">Practice <span>Modes</span></div>
+      <div class="section-subtitle">Test yourself and build real fluency</div>
+    </div>
+
+    <div class="practice-modes">
+      <div class="mode-card" id="mode-card-translate" onclick="startPractice('translate')">
+        <div class="mode-icon">🔤</div>
+        <div class="mode-name">Translate It</div>
+        <div class="mode-desc">See Arabic, choose the English meaning</div>
+      </div>
+      <div class="mode-card" id="mode-card-arabic" onclick="startPractice('arabic')">
+        <div class="mode-icon">🌙</div>
+        <div class="mode-name">Arabic Match</div>
+        <div class="mode-desc">See English, find the Arabic phrase</div>
+      </div>
+      <div class="mode-card" id="mode-card-type" onclick="startPractice('type')">
+        <div class="mode-icon">⌨️</div>
+        <div class="mode-name">Type It</div>
+        <div class="mode-desc">Type the English translation</div>
+      </div>
+      <div class="mode-card locked-mode" id="mode-card-convo" onclick="openPremiumModal()">
+        <div class="mode-icon">💬</div>
+        <div class="mode-name">Conversation <span class="premium-badge">PRO</span></div>
+        <div class="mode-desc">Full role-play conversations</div>
+      </div>
+    </div>
+
+    <div class="practice-arena" id="practice-arena">
+      <div style="text-align:center;color:var(--text3)">
+        <div style="font-size:3rem;margin-bottom:16px">🌙</div>
+        <div style="font-size:1rem;font-weight:600;margin-bottom:8px">Choose a practice mode above</div>
+        <div style="font-size:0.85rem">Pick a mode to start testing your Arabic!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PHRASEBOOK ========== -->
+  <div class="section" id="section-phrasebook">
+    <div class="section-header">
+      <div class="section-title">Full <span>Phrasebook</span></div>
+      <div class="section-subtitle">Search and browse all phrases</div>
+    </div>
+    <div class="search-bar-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-bar" type="text" placeholder="Search in English or Arabic..." oninput="searchPhrases(this.value)" id="phrase-search">
+    </div>
+    <div class="filter-tags" id="filter-tags"></div>
+    <div class="phrase-list" id="phrasebook-list"></div>
+  </div>
+
+  <!-- ========== PROGRESS ========== -->
+  <div class="section" id="section-progress">
+    <div class="section-header">
+      <div class="section-title">Your <span>Progress</span></div>
+    </div>
+    <div class="progress-grid">
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-phrases">0</div>
+        <div class="progress-stat-label">Phrases Learned</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-correct">0</div>
+        <div class="progress-stat-label">Correct Answers</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-streak">0</div>
+        <div class="progress-stat-label">Day Streak</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-xp">0</div>
+        <div class="progress-stat-label">Total XP</div>
+      </div>
+    </div>
+
+    <div class="level-bar-wrap">
+      <div class="level-title">
+        <div class="level-name" id="level-name">🌱 Beginner</div>
+        <div class="level-xp" id="level-xp-label">0 / 200 XP</div>
+      </div>
+      <div class="level-bar"><div class="level-bar-fill" id="level-bar-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="section-title" style="margin-bottom:16px">Achievements</div>
+    <div class="achievements-grid" id="achievements-grid"></div>
+  </div>
+
+  <!-- ========== SETTINGS ========== -->
+  <div class="section" id="section-settings">
+    <div class="section-header">
+      <div class="section-title"><span>Settings</span></div>
+    </div>
+    <div class="settings-group">
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Sound Effects</div>
+          <div class="settings-desc">Play sounds when answering</div>
+        </div>
+        <div class="toggle on" id="toggle-sound" onclick="toggleSetting('sound')"></div>
+      </div>
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Show Transliteration</div>
+          <div class="settings-desc">Show pronunciation guide under Arabic</div>
+        </div>
+        <div class="toggle on" id="toggle-translit" onclick="toggleSetting('translit')"></div>
+      </div>
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Show Context</div>
+          <div class="settings-desc">Show when/how to use each phrase</div>
+        </div>
+        <div class="toggle on" id="toggle-context" onclick="toggleSetting('context')"></div>
+      </div>
+    </div>
+    <div class="settings-group">
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Reset Progress</div>
+          <div class="settings-desc">Clear all XP and learned phrases</div>
+        </div>
+        <button class="btn-secondary" onclick="resetProgress()" style="font-size:0.8rem;padding:8px 16px">Reset</button>
+      </div>
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Unlock Premium</div>
+          <div class="settings-desc">Access all content for $4.99</div>
+        </div>
+        <button class="btn-primary" onclick="openPremiumModal()" style="font-size:0.8rem;padding:8px 16px">Upgrade</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end app-wrapper -->
+
+<script>
+// ============================================================
+// DATA — Phrases organized by category
+// ============================================================
+
+const CATEGORIES = [
+  {
+    id: 'greetings',
+    name: 'Greetings & Introductions',
+    icon: '👋',
+    desc: 'Say hello, introduce yourself, be polite',
+    premium: false,
+    unlockXP: 0,
+  },
+  {
+    id: 'everyday',
+    name: 'Everyday Expressions',
+    icon: '☀️',
+    desc: 'Common phrases Arabs use all day long',
+    premium: false,
+    unlockXP: 0,
+  },
+  {
+    id: 'directions',
+    name: 'Getting Around',
+    icon: '🗺️',
+    desc: 'Ask for directions, take taxis, navigate',
+    premium: false,
+    unlockXP: 80,
+  },
+  {
+    id: 'food',
+    name: 'Food & Restaurants',
+    icon: '🍽️',
+    desc: 'Order food, ask about dishes, pay the bill',
+    premium: false,
+    unlockXP: 160,
+  },
+  {
+    id: 'social',
+    name: 'Social & Friendships',
+    icon: '🤝',
+    desc: 'Make friends, small talk, invitations',
+    premium: true,
+    unlockXP: 250,
+  },
+  {
+    id: 'shopping',
+    name: 'Shopping & Bargaining',
+    icon: '🛍️',
+    desc: 'Buy things, ask prices, negotiate',
+    premium: true,
+    unlockXP: 350,
+  },
+  {
+    id: 'work',
+    name: 'Work & Business',
+    icon: '💼',
+    desc: 'Professional phrases for the workplace',
+    premium: true,
+    unlockXP: 450,
+  },
+  {
+    id: 'emergency',
+    name: 'Emergency & Medical',
+    icon: '🏥',
+    desc: 'Critical phrases when you need help',
+    premium: true,
+    unlockXP: 0,
+  },
+];
+
+const PHRASES = {
+  greetings: [
+    { arabic: 'السلام عليكم', translit: 'As-salamu alaykum', english: 'Peace be upon you (Hello)', context: 'Universal Islamic greeting — always appropriate' },
+    { arabic: 'وعليكم السلام', translit: 'Wa alaykum as-salam', english: 'And upon you peace (Hello back)', context: 'The reply to As-salamu alaykum' },
+    { arabic: 'مرحبا', translit: 'Marhaba', english: 'Welcome / Hi', context: 'Casual everyday hello' },
+    { arabic: 'أهلاً وسهلاً', translit: 'Ahlan wa sahlan', english: 'Welcome (warm greeting)', context: 'Very warm welcome — used when hosting' },
+    { arabic: 'كيف حالك؟', translit: 'Kayfa halak?', english: 'How are you? (to a man)', context: 'Most common greeting after hello' },
+    { arabic: 'كيف حالكِ؟', translit: 'Kayfa halik?', english: 'How are you? (to a woman)', context: 'Same but for women' },
+    { arabic: 'بخير، شكراً', translit: 'Bikhair, shukran', english: 'Fine, thank you', context: 'Standard reply to "how are you"' },
+    { arabic: 'ما اسمك؟', translit: 'Ma ismak?', english: 'What is your name?', context: 'When meeting someone new' },
+    { arabic: 'اسمي...', translit: 'Ismi...', english: 'My name is...', context: 'Fill in your name after' },
+    { arabic: 'تشرفنا', translit: 'Tasharrafna', english: 'Nice to meet you', context: 'Formal and polite way to say nice to meet you' },
+    { arabic: 'من أين أنت؟', translit: 'Min ayna ant?', english: 'Where are you from?', context: 'Common question when meeting people' },
+    { arabic: 'أنا من...', translit: 'Ana min...', english: 'I am from...', context: 'Fill in your country' },
+    { arabic: 'مع السلامة', translit: 'Ma\'a as-salama', english: 'Goodbye (go in safety)', context: 'Most common goodbye' },
+    { arabic: 'إلى اللقاء', translit: 'Ila al-liqa\'', english: 'Until we meet again', context: 'Friendly farewell' },
+    { arabic: 'صباح الخير', translit: 'Sabah al-khayr', english: 'Good morning', context: 'Morning greeting' },
+    { arabic: 'صباح النور', translit: 'Sabah an-nur', english: 'Good morning (reply)', context: 'Reply to good morning — literally "morning of light"' },
+    { arabic: 'مساء الخير', translit: 'Masa\' al-khayr', english: 'Good evening', context: 'Evening greeting' },
+    { arabic: 'تصبح على خير', translit: 'Tusbih \'ala khayr', english: 'Good night', context: 'Wishing someone a good night' },
+  ],
+  everyday: [
+    { arabic: 'إن شاء الله', translit: 'Inshallah', english: 'God willing / Hopefully', context: 'Said when talking about future plans — VERY common' },
+    { arabic: 'الحمد لله', translit: 'Alhamdulillah', english: 'Praise be to God / Thank God', context: 'Said after something good, or when asked "how are you"' },
+    { arabic: 'ماشي', translit: 'Mashi', english: 'OK / Alright / Got it', context: 'The most casual "okay" — used constantly' },
+    { arabic: 'يلا', translit: 'Yalla', english: 'Let\'s go / Come on / Hurry up', context: 'EXTREMELY common — used in almost every situation' },
+    { arabic: 'خلاص', translit: 'Khalas', english: 'Done / Finished / That\'s it', context: 'Used to say something is over or settled' },
+    { arabic: 'شكراً', translit: 'Shukran', english: 'Thank you', context: 'Universal thank you' },
+    { arabic: 'شكراً جزيلاً', translit: 'Shukran jazilan', english: 'Thank you very much', context: 'More formal/emphatic thank you' },
+    { arabic: 'عفواً', translit: '\'Afwan', english: 'You\'re welcome / Excuse me / Sorry', context: 'Used for all three meanings depending on context' },
+    { arabic: 'من فضلك', translit: 'Min fadlak', english: 'Please (to a man)', context: 'Polite request' },
+    { arabic: 'لو سمحت', translit: 'Law samaht', english: 'Excuse me / If you please', context: 'Getting attention or making requests' },
+    { arabic: 'آسف', translit: 'Asif', english: 'Sorry (man speaking)', context: 'Apologizing' },
+    { arabic: 'لا أفهم', translit: 'La afham', english: 'I don\'t understand', context: 'When you\'re lost in conversation' },
+    { arabic: 'تكلم ببطء من فضلك', translit: 'Takallam bi-but\' min fadlak', english: 'Please speak slowly', context: 'Ask someone to slow down' },
+    { arabic: 'هل تتكلم إنجليزي؟', translit: 'Hal tatakallam Injilizi?', english: 'Do you speak English?', context: 'When you need to switch to English' },
+    { arabic: 'نعم', translit: 'Na\'am', english: 'Yes', context: 'Formal yes' },
+    { arabic: 'أيوه', translit: 'Aywa', english: 'Yes (casual)', context: 'Casual yes — very common in Gulf and Egypt' },
+    { arabic: 'لا', translit: 'La', english: 'No', context: 'Simple no' },
+    { arabic: 'ربما', translit: 'Rubbama', english: 'Maybe', context: 'When not sure' },
+    { arabic: 'بالتوفيق', translit: 'Bil-tawfiq', english: 'Good luck', context: 'Wishing someone luck' },
+    { arabic: 'يعطيك العافية', translit: 'Ya\'tik al-\'afiya', english: 'May God give you health', context: 'Said to someone who just finished work — like "good job"' },
+  ],
+  directions: [
+    { arabic: 'أين...؟', translit: 'Ayna...?', english: 'Where is...?', context: 'The most useful direction phrase' },
+    { arabic: 'كيف أذهب إلى...؟', translit: 'Kayfa adhabu ila...?', english: 'How do I get to...?', context: 'Asking for directions' },
+    { arabic: 'على اليمين', translit: '\'Ala al-yamin', english: 'On the right', context: 'Direction' },
+    { arabic: 'على اليسار', translit: '\'Ala al-yasar', english: 'On the left', context: 'Direction' },
+    { arabic: 'على طول', translit: '\'Ala tul', english: 'Straight ahead', context: 'Keep going straight' },
+    { arabic: 'قريب', translit: 'Qarib', english: 'Near / Close', context: 'It\'s nearby' },
+    { arabic: 'بعيد', translit: 'Ba\'id', english: 'Far', context: 'It\'s far away' },
+    { arabic: 'أوقف هنا من فضلك', translit: 'Awqif huna min fadlak', english: 'Stop here please', context: 'Telling a taxi driver to stop' },
+    { arabic: 'كم المسافة؟', translit: 'Kam al-masafa?', english: 'How far is it?', context: 'Asking distance' },
+    { arabic: 'المطار', translit: 'Al-matar', english: 'The airport', context: 'Useful destination' },
+    { arabic: 'الفندق', translit: 'Al-funduq', english: 'The hotel', context: 'Useful destination' },
+    { arabic: 'المستشفى', translit: 'Al-mustashfa', english: 'The hospital', context: 'Useful destination' },
+  ],
+  food: [
+    { arabic: 'أريد...', translit: 'Urid...', english: 'I want...', context: 'To order food — fill in what you want' },
+    { arabic: 'ماذا تنصح؟', translit: 'Matha tansah?', english: 'What do you recommend?', context: 'Ask the waiter for recommendations' },
+    { arabic: 'الحساب من فضلك', translit: 'Al-hisab min fadlak', english: 'The bill please', context: 'Asking for the check' },
+    { arabic: 'لذيذ جداً', translit: 'Ladhidh jiddan', english: 'Very delicious', context: 'Complimenting food' },
+    { arabic: 'بدون...', translit: 'Bidun...', english: 'Without...', context: 'Ordering without something (e.g., without onions)' },
+    { arabic: 'هل يحتوي على...؟', translit: 'Hal yahtawi \'ala...?', english: 'Does it contain...?', context: 'Asking about allergens' },
+    { arabic: 'ماء من فضلك', translit: 'Ma\' min fadlak', english: 'Water please', context: 'Ordering water' },
+    { arabic: 'بالعافية', translit: 'Bil-\'afiya', english: 'Bon appétit / Enjoy your meal', context: 'Said before eating' },
+    { arabic: 'صحتين', translit: 'Sahtayn', english: 'Cheers / To your health', context: 'Said when someone is eating or drinking' },
+    { arabic: 'كم هذا؟', translit: 'Kam hadha?', english: 'How much is this?', context: 'Asking price' },
+    { arabic: 'أنا نباتي', translit: 'Ana nabati', english: 'I am vegetarian', context: 'Important dietary preference' },
+    { arabic: 'طاولة لشخصين', translit: 'Tawila li-shakhsayn', english: 'A table for two', context: 'Asking for a table at a restaurant' },
+  ],
+  social: [
+    { arabic: 'تعال معنا!', translit: 'Ta\'al ma\'na!', english: 'Come with us!', context: 'Inviting someone to join' },
+    { arabic: 'هل أنت حر الليلة؟', translit: 'Hal anta hurr al-layla?', english: 'Are you free tonight?', context: 'Making plans' },
+    { arabic: 'أنت صديقي', translit: 'Anta sadiqi', english: 'You are my friend', context: 'Expressing friendship' },
+    { arabic: 'يسعدني', translit: 'Yus\'iduni', english: 'It makes me happy / My pleasure', context: 'Expressing happiness about something' },
+    { arabic: 'وحشتني', translit: 'Wahashtani', english: 'I missed you', context: 'Telling someone you missed them' },
+    { arabic: 'برافو عليك', translit: 'Bravo \'alayk', english: 'Well done! / Bravo!', context: 'Congratulating someone' },
+    { arabic: 'إيش أخبارك؟', translit: 'Esh akhbarak?', english: 'What\'s up? / What\'s new?', context: 'Casual check in with a friend' },
+    { arabic: 'على ماذا تعمل؟', translit: '\'Ala matha ta\'mal?', english: 'What do you do for work?', context: 'Asking about someone\'s job' },
+    { arabic: 'أعجبني كثيراً', translit: 'A\'jabani kathiran', english: 'I really liked it', context: 'Expressing that you liked something' },
+    { arabic: 'مبروك!', translit: 'Mabrook!', english: 'Congratulations!', context: 'For any happy occasion' },
+  ],
+  shopping: [
+    { arabic: 'بكم هذا؟', translit: 'Bikam hadha?', english: 'How much is this?', context: 'Asking price while shopping' },
+    { arabic: 'غالي جداً', translit: 'Ghali jiddan', english: 'Very expensive', context: 'Reacting to a high price' },
+    { arabic: 'هل يمكنك تخفيض السعر؟', translit: 'Hal yumkinuka takhfid as-si\'r?', english: 'Can you lower the price?', context: 'Negotiating' },
+    { arabic: 'أعطيني...', translit: 'A\'tini...', english: 'Give me...', context: 'Requesting an item' },
+    { arabic: 'بس هذا', translit: 'Bas hadha', english: 'Just this / That\'s all', context: 'When you\'re done shopping' },
+    { arabic: 'هل عندك...؟', translit: 'Hal \'indak...?', english: 'Do you have...?', context: 'Asking if something is available' },
+    { arabic: 'أريد أن أشتري', translit: 'Urid an ashtari', english: 'I want to buy', context: 'Expressing intent to purchase' },
+    { arabic: 'هل يوجد خصم؟', translit: 'Hal yujad khasd?', english: 'Is there a discount?', context: 'Asking for a deal' },
+  ],
+  work: [
+    { arabic: 'أنا جديد هنا', translit: 'Ana jadid huna', english: 'I am new here', context: 'When starting a new job or place' },
+    { arabic: 'هل يمكنني التحدث مع المدير؟', translit: 'Hal yumkinuni at-tahadduth ma\'a al-mudir?', english: 'Can I speak with the manager?', context: 'Asking for a manager' },
+    { arabic: 'أحتاج إلى مساعدة', translit: 'Ahtaj ila musa\'ada', english: 'I need help', context: 'Asking for assistance at work' },
+    { arabic: 'اجتماع', translit: 'Ijtima\'', english: 'Meeting', context: 'Work vocabulary' },
+    { arabic: 'متى الموعد؟', translit: 'Mata al-maw\'id?', english: 'When is the appointment?', context: 'Asking about a meeting time' },
+    { arabic: 'أرسل لي إيميل', translit: 'Arsil li email', english: 'Send me an email', context: 'Office communication' },
+    { arabic: 'مشغول الآن', translit: 'Mashghul al-an', english: 'Busy right now', context: 'Telling someone you\'re occupied' },
+    { arabic: 'شكراً على تعاونك', translit: 'Shukran \'ala ta\'awunak', english: 'Thank you for your cooperation', context: 'Professional thank you' },
+  ],
+  emergency: [
+    { arabic: 'النجدة!', translit: 'An-najda!', english: 'Help!', context: 'Emergency cry for help' },
+    { arabic: 'اتصل بالإسعاف!', translit: 'Ittasil bil-is\'af!', english: 'Call an ambulance!', context: 'Medical emergency' },
+    { arabic: 'اتصل بالشرطة!', translit: 'Ittasil bish-shurta!', english: 'Call the police!', context: 'Police emergency' },
+    { arabic: 'أنا مريض', translit: 'Ana marid', english: 'I am sick', context: 'Saying you\'re ill' },
+    { arabic: 'أنا ضائع', translit: 'Ana da\'i\'', english: 'I am lost', context: 'When you\'re lost' },
+    { arabic: 'أين المستشفى؟', translit: 'Ayna al-mustashfa?', english: 'Where is the hospital?', context: 'Finding medical care' },
+    { arabic: 'أحتاج طبيب', translit: 'Ahtaj tabib', english: 'I need a doctor', context: 'Medical emergency' },
+    { arabic: 'عندي حساسية من...', translit: '\'Indi hasasiya min...', english: 'I am allergic to...', context: 'Important medical info' },
+    { arabic: 'سُرق مني', translit: 'Suriqa minni', english: 'I was robbed', context: 'Reporting a theft' },
+  ],
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  xp: 0,
+  streak: 0,
+  lastPlayed: null,
+  mastered: {},
+  correctAnswers: 0,
+  isPremium: false,
+  settings: {
+    sound: true,
+    translit: true,
+    context: true,
+  },
+  practiceMode: null,
+  practiceStats: { correct: 0, wrong: 0, streak: 0 },
+  currentQuestion: null,
+  answered: false,
+};
+
+const OWNER_CODE = 'ARABILEARN2024';
+const GUMROAD_LINK = 'https://gumroad.com/l/arabilearn';
+const APP_URL = 'https://sheroo6211.github.io/ArabiLearn';
+const APP_MSG = 'I found this free Arabic learning app — ArabiLearn! Real phrases, real conversations. Check it out 🌙';
+
+const LEVELS = [
+  { name: '🌱 Beginner', xp: 0 },
+  { name: '📖 Student', xp: 200 },
+  { name: '🗣️ Conversational', xp: 500 },
+  { name: '🌙 Fluent', xp: 1000 },
+  { name: '⭐ Advanced', xp: 2000 },
+  { name: '🏆 Master', xp: 4000 },
+];
+
+const ACHIEVEMENTS = [
+  { id: 'first', icon: '🌱', name: 'First Steps', desc: 'Learn your first phrase', check: s => s.correctAnswers >= 1 },
+  { id: 'ten', icon: '🔟', name: 'Ten Down', desc: '10 correct answers', check: s => s.correctAnswers >= 10 },
+  { id: 'fifty', icon: '🌟', name: 'Fifty Strong', desc: '50 correct answers', check: s => s.correctAnswers >= 50 },
+  { id: 'streak3', icon: '🔥', name: 'On Fire', desc: '3 day streak', check: s => s.streak >= 3 },
+  { id: 'streak7', icon: '💪', name: 'Week Warrior', desc: '7 day streak', check: s => s.streak >= 7 },
+  { id: 'mastered5', icon: '⭐', name: 'Rising Star', desc: 'Master 5 phrases', check: s => Object.keys(s.mastered).filter(k => s.mastered[k] >= 3).length >= 5 },
+  { id: 'mastered20', icon: '🏅', name: 'Dedicated', desc: 'Master 20 phrases', check: s => Object.keys(s.mastered).filter(k => s.mastered[k] >= 3).length >= 20 },
+  { id: 'xp500', icon: '💛', name: 'Golden', desc: 'Reach 500 XP', check: s => s.xp >= 500 },
+  { id: 'premium', icon: '👑', name: 'Premium Member', desc: 'Unlock premium content', check: s => s.isPremium },
+];
+
+// ============================================================
+// SAVE / LOAD
+// ============================================================
+function saveState() {
+  localStorage.setItem('arabilearn_state', JSON.stringify(state));
+}
+function loadState() {
+  const saved = localStorage.getItem('arabilearn_state');
+  if (saved) {
+    try { Object.assign(state, JSON.parse(saved)); } catch(e) {}
+  }
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ============================================================
+// NAV
+// ============================================================
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    if (t.textContent.toLowerCase().includes(id) || (id === 'home' && t.textContent.includes('Home'))) {
+      t.classList.add('active');
+    }
+  });
+  if (id === 'progress') updateProgressSection();
+  if (id === 'phrasebook') renderPhrasebook();
+}
+
+// ============================================================
+// XP & LEVELS
+// ============================================================
+function addXP(amount) {
+  state.xp += amount;
+  saveState();
+  updateXPDisplay();
+  checkAchievements();
+}
+
+function updateXPDisplay() {
+  document.getElementById('xp-display').textContent = state.xp;
+  document.getElementById('streak-display').textContent = state.streak;
+}
+
+function getLevel() {
+  let level = LEVELS[0];
+  for (const l of LEVELS) {
+    if (state.xp >= l.xp) level = l;
+  }
+  return level;
+}
+
+function getNextLevel() {
+  for (let i = 0; i < LEVELS.length - 1; i++) {
+    if (state.xp < LEVELS[i+1].xp) return LEVELS[i+1];
+  }
+  return null;
+}
+
+// ============================================================
+// ACHIEVEMENTS
+// ============================================================
+function checkAchievements() {
+  for (const ach of ACHIEVEMENTS) {
+    if (!state.mastered['ach_' + ach.id] && ach.check(state)) {
+      state.mastered['ach_' + ach.id] = true;
+      saveState();
+      showToast('🏆 Achievement unlocked: ' + ach.name + '!');
+    }
+  }
+}
+
+// ============================================================
+// HOME — Showcase cards
+// ============================================================
+function renderShowcase() {
+  const el = document.getElementById('phrase-showcase');
+  const picks = [
+    PHRASES.everyday[0], // inshallah
+    PHRASES.everyday[1], // alhamdulillah
+    PHRASES.everyday[3], // yalla
+    PHRASES.everyday[4], // khalas
+    PHRASES.greetings[0], // as-salamu alaykum
+    PHRASES.greetings[14], // sabah al-khayr
+    PHRASES.everyday[6], // shukran
+    PHRASES.everyday[10], // maashi
+  ];
+  el.innerHTML = picks.map(p => `
+    <div class="showcase-card" onclick="speakArabic('${p.arabic}')">
+      <div class="showcase-arabic">${p.arabic}</div>
+      <div class="showcase-transliteration">${p.translit}</div>
+      <div class="showcase-english">${p.english}</div>
+      <div class="showcase-play">▶ tap to hear</div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// LESSONS
+// ============================================================
+function renderCategories() {
+  const el = document.getElementById('category-grid');
+  el.innerHTML = CATEGORIES.map(cat => {
+    const phrases = PHRASES[cat.id] || [];
+    const masteredCount = phrases.filter(p => (state.mastered[p.arabic] || 0) >= 3).length;
+    const progress = phrases.length > 0 ? (masteredCount / phrases.length) * 100 : 0;
+    const locked = cat.unlockXP > 0 && state.xp < cat.unlockXP;
+    const premiumLocked = cat.premium && !state.isPremium;
+
+    let clickAction = `openCategory('${cat.id}')`;
+    if (premiumLocked) clickAction = `openPremiumModal()`;
+    else if (locked) clickAction = `showToast('Earn ${cat.unlockXP} XP to unlock!')`;
+
+    const lockBadge = premiumLocked ? '<span class="premium-badge">⭐ PRO</span>' :
+                      locked ? ' 🔒' : '';
+
+    return `
+      <div class="category-card ${locked || premiumLocked ? (premiumLocked ? 'premium-locked' : 'locked') : ''}" onclick="${clickAction}">
+        <div class="category-icon">${cat.icon}</div>
+        <div class="category-name">${cat.name}${lockBadge}</div>
+        <div class="category-desc">${cat.desc}</div>
+        <div class="category-count">${phrases.length} phrases · ${masteredCount} mastered</div>
+        <div class="category-progress">
+          <div class="category-progress-bar" style="width:${progress}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openCategory(catId) {
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const phrases = PHRASES[catId] || [];
+
+  document.getElementById('lesson-list').classList.remove('active');
+  document.getElementById('lesson-view').classList.add('active');
+
+  document.getElementById('lesson-view-header').innerHTML = `
+    <div class="section-title">${cat.icon} <span>${cat.name}</span></div>
+    <div class="section-subtitle">${phrases.length} phrases — tap any card to hear it</div>
+  `;
+
+  document.getElementById('lesson-phrase-list').innerHTML = phrases.map((p, i) => {
+    const mastery = state.mastered[p.arabic] || 0;
+    return `
+      <div class="phrase-card ${mastery >= 3 ? 'mastered' : ''}" onclick="speakArabic('${p.arabic}')">
+        <div class="phrase-left">
+          <div class="phrase-arabic">${p.arabic}</div>
+          ${state.settings.translit ? `<div class="phrase-transliteration">${p.translit}</div>` : ''}
+          <div class="phrase-english">${p.english}</div>
+          ${state.settings.context ? `<div class="phrase-context">${p.context}</div>` : ''}
+        </div>
+        <div class="phrase-actions">
+          <button class="play-btn" onclick="event.stopPropagation();speakArabic('${p.arabic}')">▶</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  addXP(5);
+}
+
+function backToCategories() {
+  document.getElementById('lesson-list').classList.add('active');
+  document.getElementById('lesson-view').classList.remove('active');
+  renderCategories();
+}
+
+// ============================================================
+// TEXT TO SPEECH
+// ============================================================
+function speakArabic(text) {
+  if (!state.settings.sound) return;
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.85;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+  }
+}
+
+// ============================================================
+// PRACTICE
+// ============================================================
+function getAllPhrases() {
+  let all = [];
+  for (const cat of CATEGORIES) {
+    if (!cat.premium || state.isPremium) {
+      all = all.concat((PHRASES[cat.id] || []).map(p => ({...p, category: cat.id})));
+    }
+  }
+  return all;
+}
+
+function startPractice(mode) {
+  state.practiceMode = mode;
+  state.practiceStats = { correct: 0, wrong: 0, streak: 0 };
+  state.answered = false;
+
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('mode-card-' + mode)?.classList.add('active');
+
+  nextQuestion();
+}
+
+function nextQuestion() {
+  const all = getAllPhrases();
+  if (all.length < 4) { showToast('Complete more lessons first!'); return; }
+
+  state.answered = false;
+  const phrase = all[Math.floor(Math.random() * all.length)];
+  state.currentQuestion = phrase;
+
+  const arena = document.getElementById('practice-arena');
+
+  const scoreHTML = `
+    <div class="practice-score">
+      <div class="score-chip correct">✓ ${state.practiceStats.correct}</div>
+      <div class="score-chip wrong">✗ ${state.practiceStats.wrong}</div>
+      <div class="score-chip streak">🔥 ${state.practiceStats.streak}</div>
+    </div>
+  `;
+
+  if (state.practiceMode === 'translate') {
+    // Show Arabic, choose English
+    const wrong = all.filter(p => p.arabic !== phrase.arabic).sort(() => Math.random() - 0.5).slice(0, 3);
+    const choices = [...wrong, phrase].sort(() => Math.random() - 0.5);
+    arena.innerHTML = scoreHTML + `
+      <div class="question-label">WHAT DOES THIS MEAN?</div>
+      <div class="question-arabic">${phrase.arabic}</div>
+      <div class="question-transliteration">${state.settings.translit ? phrase.translit : ''}</div>
+      <button class="play-btn" style="margin:0 auto 24px" onclick="speakArabic('${phrase.arabic}')">▶</button>
+      <div class="choices">
+        ${choices.map(c => `<button class="choice-btn" onclick="checkChoice(this, '${c.arabic}', '${phrase.arabic}')">${c.english}</button>`).join('')}
+      </div>
+    `;
+  } else if (state.practiceMode === 'arabic') {
+    // Show English, choose Arabic
+    const wrong = all.filter(p => p.arabic !== phrase.arabic).sort(() => Math.random() - 0.5).slice(0, 3);
+    const choices = [...wrong, phrase].sort(() => Math.random() - 0.5);
+    arena.innerHTML = scoreHTML + `
+      <div class="question-label">FIND THE ARABIC</div>
+      <div class="question-english" style="font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:8px">${phrase.english}</div>
+      <div class="question-transliteration" style="margin-bottom:24px">${state.settings.translit ? phrase.translit : ''}</div>
+      <div class="choices">
+        ${choices.map(c => `<button class="choice-btn arabic-choice" onclick="checkChoice(this, '${c.arabic}', '${phrase.arabic}')">${c.arabic}</button>`).join('')}
+      </div>
+    `;
+  } else if (state.practiceMode === 'type') {
+    arena.innerHTML = scoreHTML + `
+      <div class="question-label">TYPE THE ENGLISH MEANING</div>
+      <div class="question-arabic">${phrase.arabic}</div>
+      <div class="question-transliteration">${state.settings.translit ? phrase.translit : ''}</div>
+      <button class="play-btn" style="margin:0 auto 20px" onclick="speakArabic('${phrase.arabic}')">▶</button>
+      <input class="type-input" type="text" id="type-answer" placeholder="Type the meaning..." onkeydown="if(event.key==='Enter')checkTypeAnswer()">
+      <button class="btn-primary" onclick="checkTypeAnswer()">Check</button>
+    `;
+    setTimeout(() => document.getElementById('type-answer')?.focus(), 100);
+  }
+}
+
+function checkChoice(btn, chosen, correct) {
+  if (state.answered) return;
+  state.answered = true;
+
+  document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    state.practiceStats.correct++;
+    state.practiceStats.streak++;
+    state.mastered[correct] = (state.mastered[correct] || 0) + 1;
+    state.correctAnswers++;
+    addXP(10);
+    speakArabic(correct);
+    showToast('✓ Correct! +10 XP');
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.choice-btn').forEach(b => {
+      if (b.textContent === state.currentQuestion.english || b.textContent === state.currentQuestion.arabic) {
+        b.classList.add('correct');
+      }
+    });
+    state.practiceStats.wrong++;
+    state.practiceStats.streak = 0;
+    showToast('✗ Not quite — try again!');
+  }
+
+  saveState();
+  checkAchievements();
+
+  const arena = document.getElementById('practice-arena');
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'next-btn';
+  nextBtn.textContent = 'Next →';
+  nextBtn.onclick = nextQuestion;
+  arena.appendChild(nextBtn);
+}
+
+function checkTypeAnswer() {
+  if (state.answered) return;
+  const input = document.getElementById('type-answer');
+  if (!input) return;
+  const answer = input.value.trim().toLowerCase();
+  const correct = state.currentQuestion.english.toLowerCase();
+
+  // fuzzy match — answer must share significant words
+  const correctWords = correct.split(/\s+/).filter(w => w.length > 3);
+  const answerWords = answer.split(/\s+/);
+  const matches = correctWords.filter(w => answerWords.some(a => a.includes(w) || w.includes(a)));
+  const isCorrect = answer === correct || matches.length >= Math.ceil(correctWords.length * 0.5);
+
+  state.answered = true;
+  input.disabled = true;
+
+  const arena = document.getElementById('practice-arena');
+
+  if (isCorrect) {
+    input.style.borderColor = 'var(--green)';
+    state.practiceStats.correct++;
+    state.practiceStats.streak++;
+    state.correctAnswers++;
+    state.mastered[state.currentQuestion.arabic] = (state.mastered[state.currentQuestion.arabic] || 0) + 1;
+    addXP(15);
+    showToast('✓ Correct! +15 XP');
+  } else {
+    input.style.borderColor = 'var(--red)';
+    state.practiceStats.wrong++;
+    state.practiceStats.streak = 0;
+    const fb = document.createElement('div');
+    fb.className = 'feedback-wrong';
+    fb.textContent = 'Answer: ' + state.currentQuestion.english;
+    arena.appendChild(fb);
+    showToast('✗ The answer was: ' + state.currentQuestion.english);
+  }
+
+  saveState();
+  checkAchievements();
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'next-btn';
+  nextBtn.textContent = 'Next →';
+  nextBtn.onclick = nextQuestion;
+  arena.appendChild(nextBtn);
+}
+
+// ============================================================
+// PHRASEBOOK
+// ============================================================
+let activeFilter = 'all';
+
+function renderPhrasebook(query = '') {
+  // Render filter tags
+  const tagsEl = document.getElementById('filter-tags');
+  tagsEl.innerHTML = [
+    { id: 'all', name: 'All' },
+    ...CATEGORIES.map(c => ({ id: c.id, name: c.icon + ' ' + c.name.split(' ')[0] }))
+  ].map(t => `<span class="filter-tag ${activeFilter === t.id ? 'active' : ''}" onclick="setFilter('${t.id}')">${t.name}</span>`).join('');
+
+  // Gather phrases
+  let all = [];
+  for (const cat of CATEGORIES) {
+    const isLocked = cat.premium && !state.isPremium;
+    (PHRASES[cat.id] || []).forEach(p => all.push({...p, locked: isLocked}));
+  }
+
+  // Filter
+  if (activeFilter !== 'all') {
+    const catPhrases = PHRASES[activeFilter] || [];
+    const isLocked = CATEGORIES.find(c => c.id === activeFilter)?.premium && !state.isPremium;
+    all = catPhrases.map(p => ({...p, locked: isLocked}));
+  }
+  if (query) {
+    all = all.filter(p =>
+      p.english.toLowerCase().includes(query.toLowerCase()) ||
+      p.arabic.includes(query) ||
+      p.translit.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  const el = document.getElementById('phrasebook-list');
+  if (all.length === 0) {
+    el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:40px">No phrases found</div>';
+    return;
+  }
+
+  el.innerHTML = all.map(p => {
+    if (p.locked) {
+      return `
+        <div class="phrase-card" onclick="openPremiumModal()" style="cursor:pointer;opacity:0.6">
+          <div class="phrase-left">
+            <div class="phrase-arabic" style="filter:blur(4px)">أ ب ت</div>
+            <div class="phrase-english">🔒 Premium phrase — unlock for $4.99</div>
+          </div>
+          <span class="premium-badge">⭐ PRO</span>
+        </div>
+      `;
+    }
+    const mastery = state.mastered[p.arabic] || 0;
+    return `
+      <div class="phrase-card ${mastery >= 3 ? 'mastered' : ''}" onclick="speakArabic('${p.arabic}')">
+        <div class="phrase-left">
+          <div class="phrase-arabic">${p.arabic}</div>
+          ${state.settings.translit ? `<div class="phrase-transliteration">${p.translit}</div>` : ''}
+          <div class="phrase-english">${p.english}</div>
+          ${state.settings.context ? `<div class="phrase-context">${p.context}</div>` : ''}
+        </div>
+        <div class="phrase-actions">
+          <button class="play-btn" onclick="event.stopPropagation();speakArabic('${p.arabic}')">▶</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function setFilter(id) {
+  activeFilter = id;
+  renderPhrasebook(document.getElementById('phrase-search')?.value || '');
+}
+
+function searchPhrases(query) {
+  renderPhrasebook(query);
+}
+
+// ============================================================
+// PROGRESS
+// ============================================================
+function updateProgressSection() {
+  const allPhrases = Object.values(PHRASES).flat();
+  const masteredPhrases = allPhrases.filter(p => (state.mastered[p.arabic] || 0) >= 3).length;
+
+  document.getElementById('prog-phrases').textContent = masteredPhrases;
+  document.getElementById('prog-correct').textContent = state.correctAnswers;
+  document.getElementById('prog-streak').textContent = state.streak;
+  document.getElementById('prog-xp').textContent = state.xp;
+
+  // Level bar
+  const level = getLevel();
+  const nextLevel = getNextLevel();
+  document.getElementById('level-name').textContent = level.name;
+  if (nextLevel) {
+    const progress = ((state.xp - level.xp) / (nextLevel.xp - level.xp)) * 100;
+    document.getElementById('level-bar-fill').style.width = Math.min(progress, 100) + '%';
+    document.getElementById('level-xp-label').textContent = `${state.xp} / ${nextLevel.xp} XP`;
+  } else {
+    document.getElementById('level-bar-fill').style.width = '100%';
+    document.getElementById('level-xp-label').textContent = 'Max Level!';
+  }
+
+  // Achievements
+  const achEl = document.getElementById('achievements-grid');
+  achEl.innerHTML = ACHIEVEMENTS.map(ach => {
+    const unlocked = state.mastered['ach_' + ach.id];
+    return `
+      <div class="achievement ${unlocked ? 'unlocked' : ''}">
+        <div class="achievement-icon">${ach.icon}</div>
+        <div class="achievement-name">${ach.name}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function toggleSetting(key) {
+  state.settings[key] = !state.settings[key];
+  document.getElementById('toggle-' + key).classList.toggle('on', state.settings[key]);
+  saveState();
+  showToast(key.charAt(0).toUpperCase() + key.slice(1) + ' ' + (state.settings[key] ? 'on' : 'off'));
+}
+
+function resetProgress() {
+  if (!confirm('Reset all your progress? This cannot be undone.')) return;
+  state.xp = 0;
+  state.streak = 0;
+  state.mastered = {};
+  state.correctAnswers = 0;
+  saveState();
+  updateXPDisplay();
+  showToast('Progress reset');
+}
+
+// ============================================================
+// PREMIUM
+// ============================================================
+function openPremiumModal() {
+  document.getElementById('premium-modal').classList.remove('hidden');
+  document.getElementById('unlock-code-input').value = '';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+function handleUpgrade() {
+  window.open(GUMROAD_LINK, '_blank');
+  showToast('Complete payment then enter your code!');
+}
+
+function redeemCode() {
+  const code = document.getElementById('unlock-code-input').value.trim().toUpperCase();
+  if (code === OWNER_CODE || code.startsWith('AL-')) {
+    state.isPremium = true;
+    saveState();
+    closeModal('premium-modal');
+    document.getElementById('pro-tag').classList.add('visible');
+    showToast('🎉 Premium unlocked! All content available.');
+    addXP(100);
+    renderCategories();
+  } else {
+    showToast('Invalid code — please check and try again.');
+    document.getElementById('unlock-code-input').style.borderColor = 'var(--red)';
+    setTimeout(() => document.getElementById('unlock-code-input').style.borderColor = '', 1500);
+  }
+}
+
+// ============================================================
+// SHARE
+// ============================================================
+function openShareModal() {
+  document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(APP_MSG + ' ' + APP_URL)}`;
+  document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(APP_MSG)}&url=${encodeURIComponent(APP_URL)}`;
+  document.getElementById('share-reddit').href = `https://reddit.com/submit?url=${encodeURIComponent(APP_URL)}&title=${encodeURIComponent('Free Arabic learning app for beginners — ArabiLearn')}`;
+  document.getElementById('share-modal').classList.remove('hidden');
+}
+
+function copyShareLink() {
+  navigator.clipboard.writeText(APP_URL).then(() => {
+    showToast('Link copied! 🔗');
+    closeModal('share-modal');
+  });
+}
+
+// ============================================================
+// STREAK
+// ============================================================
+function checkStreak() {
+  const today = new Date().toDateString();
+  if (state.lastPlayed !== today) {
+    state.streak++;
+    state.lastPlayed = today;
+    saveState();
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+  loadState();
+  checkStreak();
+  updateXPDisplay();
+  renderShowcase();
+  renderCategories();
+  renderPhrasebook();
+
+  // Sync settings toggles
+  ['sound', 'translit', 'context'].forEach(k => {
+    document.getElementById('toggle-' + k).classList.toggle('on', state.settings[k]);
+  });
+
+  if (state.isPremium) {
+    document.getElementById('pro-tag').classList.add('visible');
+  }
+
+  showToast('أهلاً وسهلاً — Welcome to ArabiLearn! 🌙');
+}
+
+init();
+</script>
+</body>
+</html>
