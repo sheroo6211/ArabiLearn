@@ -984,7 +984,6 @@ header {
     <button class="nav-tab" onclick="showSection('lessons')">📚 Lessons</button>
     <button class="nav-tab" onclick="showSection('practice')">🎮 Practice</button>
     <button class="nav-tab" onclick="showSection('phrasebook')">📖 Phrasebook</button>
-    <button class="nav-tab" onclick="showSection('translator')">🌐 Translator</button>
     <button class="nav-tab" onclick="showSection('progress')">🏆 Progress</button>
     <button class="nav-tab" onclick="showSection('settings')">⚙️ Settings</button>
   </nav>
@@ -1125,63 +1124,6 @@ header {
   </div>
 
   <!-- ========== SETTINGS ========== -->
-  <div class="section" id="section-translator">
-    <div class="section-header">
-      <div class="section-title">Arabic <span>Translator</span></div>
-      <div class="section-subtitle">Translate any language into Arabic — choose formal or informal tone</div>
-    </div>
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px">
-      <!-- Tone selector -->
-      <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <span style="font-size:0.75rem;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase">Tone:</span>
-        <div style="display:flex;gap:8px">
-          <button id="tone-formal" onclick="selectTranslatorTone('formal')" style="padding:7px 18px;border-radius:8px;border:1.5px solid var(--gold);background:rgba(212,175,55,0.15);color:var(--gold);font-family:var(--font);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s">🎩 Formal</button>
-          <button id="tone-informal" onclick="selectTranslatorTone('informal')" style="padding:7px 18px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--text3);font-family:var(--font);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s">😊 Informal</button>
-        </div>
-        <span id="tone-desc" style="font-size:0.78rem;color:var(--text3);margin-left:4px">Formal Arabic — suitable for professional and official use</span>
-      </div>
-
-      <!-- Input -->
-      <div style="padding:0">
-        <textarea id="translator-input" placeholder="Type or paste any text in any language..." style="width:100%;min-height:150px;padding:20px;background:transparent;border:none;color:var(--text);font-family:var(--font);font-size:1rem;line-height:1.7;resize:vertical;outline:none"></textarea>
-      </div>
-
-      <!-- Footer -->
-      <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <button onclick="clearTranslator()" style="padding:10px 18px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text3);font-family:var(--font);font-size:0.82rem;cursor:pointer;transition:all 0.2s">✕ Clear</button>
-        <button onclick="translateText()" id="translate-btn" style="padding:12px 28px;background:linear-gradient(135deg,var(--gold),#b8942a);border:none;border-radius:10px;color:#000;font-family:var(--font);font-weight:700;font-size:0.92rem;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(212,175,55,0.3)">🌐 Translate to Arabic</button>
-      </div>
-    </div>
-
-    <!-- Loading -->
-    <div id="translator-loading" style="display:none;text-align:center;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:20px">
-      <div style="font-size:1.5rem;margin-bottom:8px">🌐</div>
-      <div style="color:var(--text3);font-size:0.88rem">Translating...</div>
-    </div>
-
-    <!-- Result -->
-    <div id="translator-result" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px">
-      <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold)"></div>
-          <span style="font-size:0.82rem;font-weight:700;color:var(--text)">Arabic Translation</span>
-          <span id="result-tone-badge" style="font-size:0.65rem;background:rgba(212,175,55,0.15);border:1px solid var(--gold);color:var(--gold);padding:2px 8px;border-radius:4px;letter-spacing:1px;font-weight:800;text-transform:uppercase">FORMAL</span>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button onclick="speakArabic()" style="padding:6px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text3);font-family:var(--font);font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.2s">🔊 Listen</button>
-          <button onclick="copyTranslation()" style="padding:6px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text3);font-family:var(--font);font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.2s">📋 Copy</button>
-        </div>
-      </div>
-      <div style="padding:24px">
-        <div id="result-arabic" style="font-size:1.8rem;line-height:1.8;color:var(--text);text-align:right;direction:rtl;font-family:'Amiri',serif;margin-bottom:12px"></div>
-        <div id="result-translit" style="font-size:0.88rem;color:var(--text3);line-height:1.6;margin-bottom:8px"></div>
-        <div id="result-note" style="font-size:0.78rem;color:var(--text3);font-style:italic;border-top:1px solid var(--border);padding-top:10px;margin-top:10px"></div>
-      </div>
-    </div>
-
-  </div>
-
   <div class="section" id="section-settings">
     <div class="section-header">
       <div class="section-title"><span>Settings</span></div>
@@ -2047,10 +1989,7 @@ function init() {
 }
 
 init();
-
-// ============================================================
-// TRANSLATOR
-// ============================================================
+</script>
 let translatorTone = 'formal';
 let lastArabicResult = '';
 
